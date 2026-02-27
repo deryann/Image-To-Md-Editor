@@ -18,6 +18,13 @@
     </nav>
     <main>
         <div id="page-editor" class="page">
+            <div id="search-bar" class="search-bar hidden">
+                <input type="text" id="search-input" placeholder="搜尋所有 Markdown 檔案..." />
+                <span id="search-count" class="search-count"></span>
+                <button class="btn-icon" id="search-prev" title="上一個 (Shift+Enter)">&#9650;</button>
+                <button class="btn-icon" id="search-next" title="下一個 (Enter)">&#9660;</button>
+                <button class="btn-icon" id="search-close" title="關閉 (Esc)">&#10005;</button>
+            </div>
             <div class="editor-layout">
                 <div class="panel panel-left">
                     <div class="panel-toolbar">
@@ -113,6 +120,7 @@
     <script src="/static/js/router.js"></script>
     <script src="/static/js/editor.js"></script>
     <script src="/static/js/cropper.js"></script>
+    <script src="/static/js/search.js"></script>
     <script src="/static/js/browser.js"></script>
     <script src="/static/js/app.js"></script>
 </body>

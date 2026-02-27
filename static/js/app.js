@@ -5,5 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     Router.init();
     Editor.init();
     Cropper.init();
+    Searcher.init();
     Browser.init();
 });

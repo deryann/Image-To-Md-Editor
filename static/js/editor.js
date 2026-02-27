@@ -200,8 +200,20 @@ const Editor = (() => {
     async function showImageByFilename(filename) {
         if (images.length === 0) await loadImageList();
         const idx = images.findIndex(img => img.filename === filename);
-        if (idx >= 0) await showImage(idx);
+        if (idx < 0) return false;
+        const prevIndex = currentIndex;
+        await showImage(idx);
+        // 若使用者取消 confirmDiscard，currentIndex 不會改變
+        return currentIndex === idx;
     }
 
-    return { init, getBaseName, showImageByFilename };
+    function isPreviewMode() {
+        return previewMode;
+    }
+
+    function getTextarea() {
+        return els.mdEditor;
+    }
+
+    return { init, getBaseName, showImageByFilename, isPreviewMode, togglePreview, getTextarea };
 })();

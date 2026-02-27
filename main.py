@@ -9,6 +9,7 @@ from routers.files import router as files_router
 from routers.images import router as images_router
 from routers.markdown import router as markdown_router
 from routers.ocr import router as ocr_router
+from routers.search import router as search_router
 
 app = FastAPI(title="Image-To-Md-Editor")
 
@@ -18,6 +19,7 @@ app.include_router(markdown_router)
 app.include_router(embedded_images_router)
 app.include_router(files_router)
 app.include_router(ocr_router)
+app.include_router(search_router)
 
 # 確保必要目錄存在
 Path("data/images").mkdir(parents=True, exist_ok=True)
