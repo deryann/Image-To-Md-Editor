@@ -133,8 +133,8 @@ const Browser = (() => {
             // 建立初始 Markdown
             await fetch(`/api/markdown/${baseName}.md`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'text/plain' },
-                body: `![image](../images/${filename})`,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content: `![image](../images/${filename})` }),
             });
 
             Toast.show('上傳成功', 'success');

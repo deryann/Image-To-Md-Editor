@@ -70,8 +70,8 @@ const Editor = (() => {
         const baseName = images[currentIndex].filename.replace(/\.[^.]+$/, '');
         const res = await fetch(`/api/markdown/${baseName}.md`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'text/plain' },
-            body: els.mdEditor.value,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content: els.mdEditor.value }),
         });
 
         if (res.ok) {
