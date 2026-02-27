@@ -15,12 +15,29 @@
         </div>
     </nav>
     <main>
-        <div id="page-editor" class="page"></div>
+        <div id="page-editor" class="page">
+            <div class="editor-layout">
+                <div class="panel panel-left">
+                    <div class="panel-toolbar">
+                        <button class="btn btn-icon" id="btn-prev" title="上一張">&lt;</button>
+                        <span class="toolbar-filename" id="current-filename">—</span>
+                        <button class="btn btn-icon" id="btn-next" title="下一張">&gt;</button>
+                    </div>
+                    <div class="image-preview" id="image-preview">
+                        <img id="preview-image" alt="圖片預覽" />
+                    </div>
+                </div>
+                <div class="panel panel-right">
+                    <!-- 後續 Issue 實作 Markdown 編輯器 -->
+                </div>
+            </div>
+        </div>
         <div id="page-browser" class="page"></div>
     </main>
     <script src="/static/js/toast.js"></script>
     <script src="/static/js/spinner.js"></script>
     <script src="/static/js/router.js"></script>
+    <script src="/static/js/editor.js"></script>
     <script src="/static/js/app.js"></script>
 </body>
 </html>
