@@ -4,7 +4,12 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
+from routers.images import router as images_router
+
 app = FastAPI(title="Image-To-Md-Editor")
+
+# 註冊 API 路由
+app.include_router(images_router)
 
 # 確保必要目錄存在
 Path("data/images").mkdir(parents=True, exist_ok=True)
