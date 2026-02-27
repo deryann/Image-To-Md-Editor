@@ -18,6 +18,7 @@ const Editor = (() => {
         els.mdFilename = document.getElementById('current-md-filename');
         els.saveBtn = document.getElementById('btn-save');
         els.mdEditor = document.getElementById('md-editor');
+        els.ocrBtn = document.getElementById('btn-ocr');
         els.previewBtn = document.getElementById('btn-preview');
         els.mdPreview = document.getElementById('md-preview');
     }
@@ -141,11 +142,34 @@ const Editor = (() => {
         }
     }
 
+    async function ocr() {
+        if (currentIndex < 0) return;
+
+        els.ocrBtn.disabled = true;
+        Spinner.show('OCR 辨識中...');
+        try {
+            const formData = new FormData();
+            formData.append('filename', images[currentIndex].filename);
+            const res = await fetch('/api/ocr', { method: 'POST', body: formData });
+            if (!res.ok) throw new Error('OCR failed');
+            const data = await res.json();
+            els.mdEditor.value += '\n' + data.text;
+            updateSaveBtn();
+            Toast.show('OCR 辨識完成', 'success');
+        } catch {
+            Toast.show('OCR 辨識失敗', 'error');
+        } finally {
+            Spinner.hide();
+            els.ocrBtn.disabled = false;
+        }
+    }
+
     async function init() {
         cacheElements();
         els.prevBtn.addEventListener('click', prev);
         els.nextBtn.addEventListener('click', next);
         els.saveBtn.addEventListener('click', save);
+        els.ocrBtn.addEventListener('click', ocr);
         els.previewBtn.addEventListener('click', togglePreview);
 
         els.mdEditor.addEventListener('input', updateSaveBtn);
