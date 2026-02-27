@@ -168,5 +168,10 @@ const Editor = (() => {
         }
     }
 
-    return { init };
+    function getBaseName() {
+        if (currentIndex < 0) return null;
+        return images[currentIndex].filename.replace(/\.[^.]+$/, '');
+    }
+
+    return { init, getBaseName };
 })();

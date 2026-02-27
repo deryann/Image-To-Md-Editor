@@ -247,6 +247,12 @@ main {
     justify-content: center;
     overflow: hidden;
     padding: 16px;
+    position: relative;
+}
+
+#crop-overlay {
+    position: absolute;
+    cursor: crosshair;
 }
 
 #preview-image {
