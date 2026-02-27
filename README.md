@@ -7,12 +7,21 @@
 ### 後端
 - Python 3.11 
 - FastAPI
+- uv 套件管理
+- 找尋可供 中文 OCR 的 python 套件套用 OCR 功能
 - 預設資料路徑 Images 與 mds 資料夾在專案根目錄下，分別存放圖片與 md 檔案
 
 ### 前端
 - html
 - css
 - JavaScript
+
+### 程式碼撰寫規章
+
+- 盡可能符合 SOLID 與 DRY 原則 不要過度重複的程式碼
+- 盡可能符合 Clean Code 的原則，讓程式碼易讀、易維護
+- 盡可能符合 RESTful API 的設計原則，讓 API 易於理解與使用
+
 
 
 ### 主要功能說明
