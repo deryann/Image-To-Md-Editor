@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+
+# uv
+uv.lock
+
+# Data（保留 .gitkeep）
+data/images/*
+data/mds/*
+!data/images/.gitkeep
+!data/mds/.gitkeep
+!data/mds/embedded_images/
+data/mds/embedded_images/*
+!data/mds/embedded_images/.gitkeep
+
+# IDE
+.vscode/
+.idea/
