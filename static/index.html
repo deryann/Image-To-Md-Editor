@@ -7,7 +7,20 @@
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <h1>Image-To-Md-Editor</h1>
+    <nav class="navbar">
+        <div class="navbar-brand">Image-To-Md-Editor</div>
+        <div class="navbar-links">
+            <a href="#/editor" class="nav-link" data-page="editor">Editor</a>
+            <a href="#/browser" class="nav-link" data-page="browser">File Browser</a>
+        </div>
+    </nav>
+    <main>
+        <div id="page-editor" class="page"></div>
+        <div id="page-browser" class="page"></div>
+    </main>
+    <script src="/static/js/toast.js"></script>
+    <script src="/static/js/spinner.js"></script>
+    <script src="/static/js/router.js"></script>
     <script src="/static/js/app.js"></script>
 </body>
 </html>
