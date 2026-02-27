@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image-To-Md-Editor</title>
     <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -31,9 +33,11 @@
                     <div class="panel-toolbar">
                         <span class="toolbar-filename" id="current-md-filename">—</span>
                         <button class="btn btn-icon" id="btn-save" title="儲存 (Ctrl+S)" disabled>💾</button>
+                        <button class="btn btn-icon" id="btn-preview" title="預覽">👁</button>
                     </div>
                     <div class="editor-area">
                         <textarea id="md-editor" placeholder="尚無 Markdown 內容"></textarea>
+                        <div id="md-preview" class="md-preview hidden"></div>
                     </div>
                 </div>
             </div>

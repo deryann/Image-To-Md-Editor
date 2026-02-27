@@ -6,6 +6,7 @@ const Editor = (() => {
     let images = [];
     let currentIndex = -1;
     let savedMarkdown = '';
+    let previewMode = false;
 
     const els = {};
 
@@ -17,6 +18,8 @@ const Editor = (() => {
         els.mdFilename = document.getElementById('current-md-filename');
         els.saveBtn = document.getElementById('btn-save');
         els.mdEditor = document.getElementById('md-editor');
+        els.previewBtn = document.getElementById('btn-preview');
+        els.mdPreview = document.getElementById('md-preview');
     }
 
     async function loadImageList() {
@@ -116,13 +119,38 @@ const Editor = (() => {
         if (currentIndex < images.length - 1) showImage(currentIndex + 1);
     }
 
+    function renderPreview() {
+        let html = marked.parse(els.mdEditor.value);
+        // 將 ./embedded_images/ 相對路徑轉換為 /data/mds/embedded_images/
+        html = html.replace(
+            /src="\.\/embedded_images\//g,
+            'src="/data/mds/embedded_images/'
+        );
+        els.mdPreview.innerHTML = html;
+        // 渲染 Mermaid 圖表
+        mermaid.run({ nodes: els.mdPreview.querySelectorAll('pre code.language-mermaid') });
+    }
+
+    function togglePreview() {
+        previewMode = !previewMode;
+        els.previewBtn.classList.toggle('active', previewMode);
+        els.mdEditor.classList.toggle('hidden', previewMode);
+        els.mdPreview.classList.toggle('hidden', !previewMode);
+        if (previewMode) {
+            renderPreview();
+        }
+    }
+
     async function init() {
         cacheElements();
         els.prevBtn.addEventListener('click', prev);
         els.nextBtn.addEventListener('click', next);
         els.saveBtn.addEventListener('click', save);
+        els.previewBtn.addEventListener('click', togglePreview);
 
         els.mdEditor.addEventListener('input', updateSaveBtn);
+
+        mermaid.initialize({ startOnLoad: false });
 
         document.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && e.key === 's') {
