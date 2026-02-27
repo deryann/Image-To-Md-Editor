@@ -4,4 +4,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     Router.init();
     Editor.init();
+    Cropper.init();
 });
