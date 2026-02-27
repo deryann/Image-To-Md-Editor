@@ -255,6 +255,36 @@ main {
     object-fit: contain;
 }
 
+/* === 右面板 Markdown 編輯區 === */
+.editor-area {
+    flex: 1;
+    overflow: hidden;
+}
+
+#md-editor {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    border: none;
+    outline: none;
+    padding: 16px;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-surface);
+}
+
+#btn-save.has-changes {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #ffffff;
+}
+
+#btn-save.has-changes:hover {
+    background-color: var(--color-primary-hover);
+}
+
 /* 編輯器頁面不需要外層 padding */
 #page-editor.active {
     display: flex;

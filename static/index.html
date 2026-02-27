@@ -28,7 +28,13 @@
                     </div>
                 </div>
                 <div class="panel panel-right">
-                    <!-- 後續 Issue 實作 Markdown 編輯器 -->
+                    <div class="panel-toolbar">
+                        <span class="toolbar-filename" id="current-md-filename">—</span>
+                        <button class="btn btn-icon" id="btn-save" title="儲存 (Ctrl+S)" disabled>💾</button>
+                    </div>
+                    <div class="editor-area">
+                        <textarea id="md-editor" placeholder="尚無 Markdown 內容"></textarea>
+                    </div>
                 </div>
             </div>
         </div>
