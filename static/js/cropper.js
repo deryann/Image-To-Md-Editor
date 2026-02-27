@@ -38,7 +38,7 @@ const Cropper = (() => {
             }
         });
 
-        els.mdEditor.addEventListener('paste', onPaste);
+        document.addEventListener('paste', onPaste);
     }
 
     function resizeOverlay() {
@@ -176,7 +176,8 @@ const Cropper = (() => {
             await navigator.clipboard.write([
                 new ClipboardItem({ 'image/png': blob }),
             ]);
-            Toast.show('已複製裁切圖片', 'success');
+            Toast.show('已複製裁切圖片，請在右側編輯器 Ctrl+V 貼上', 'success');
+            els.mdEditor.focus();
         } catch (err) {
             Toast.show('複製失敗：' + err.message, 'error');
         }
@@ -196,17 +197,16 @@ const Cropper = (() => {
 
         if (!imageFile) return;
 
-        e.preventDefault();
-
+        // 檢查是否在編輯器頁面且有選擇圖片
         const baseName = Editor.getBaseName();
-        if (!baseName) {
-            Toast.show('尚未選擇圖片，無法嵌入', 'error');
-            return;
-        }
+        if (!baseName) return;
+
+        e.preventDefault();
 
         const formData = new FormData();
         formData.append('file', imageFile);
 
+        Spinner.show('嵌入圖片中...');
         try {
             const res = await fetch(`/api/embedded-images?base_name=${encodeURIComponent(baseName)}`, {
                 method: 'POST',
@@ -231,10 +231,13 @@ const Cropper = (() => {
 
             // 觸發 input 事件以更新儲存按鈕狀態
             textarea.dispatchEvent(new Event('input'));
+            textarea.focus();
 
             Toast.show('圖片已嵌入', 'success');
         } catch (err) {
             Toast.show('圖片上傳失敗：' + err.message, 'error');
+        } finally {
+            Spinner.hide();
         }
     }
 
