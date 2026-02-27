@@ -8,9 +8,15 @@ Image-To-Md-Editor：一套 Web 應用程式，用於編輯 Server Side 的圖�
 
 ## Tech Stack
 
-- **後端：** Python 3.11 + FastAPI
+- **後端：** Python 3.11 + FastAPI + uv（套件管理）
 - **前端：** 純 HTML / CSS / JavaScript（無框架）
+- **OCR：** 中文 OCR Python 套件
 - **資料儲存：** 檔案系統，以 `data/images/` 和 `data/mds/` 為主要資料路徑
+
+## Coding Standards
+
+- 遵循 SOLID、DRY、Clean Code 原則
+- API 遵循 RESTful 設計原則
 
 ## Architecture
 
