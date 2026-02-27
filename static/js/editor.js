@@ -197,5 +197,11 @@ const Editor = (() => {
         return images[currentIndex].filename.replace(/\.[^.]+$/, '');
     }
 
-    return { init, getBaseName };
+    async function showImageByFilename(filename) {
+        if (images.length === 0) await loadImageList();
+        const idx = images.findIndex(img => img.filename === filename);
+        if (idx >= 0) await showImage(idx);
+    }
+
+    return { init, getBaseName, showImageByFilename };
 })();

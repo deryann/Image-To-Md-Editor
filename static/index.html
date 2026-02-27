@@ -44,13 +44,76 @@
                 </div>
             </div>
         </div>
-        <div id="page-browser" class="page"></div>
+        <div id="page-browser" class="page">
+            <div class="browser-header">
+                <h2 class="browser-title">檔案管理</h2>
+                <button class="btn-primary" id="btn-upload">📤 上傳圖片</button>
+            </div>
+            <div class="browser-table-wrap">
+                <table class="browser-table">
+                    <thead>
+                        <tr>
+                            <th>檔名</th>
+                            <th>類型</th>
+                            <th>關聯</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="file-list"></tbody>
+                </table>
+            </div>
+
+            <!-- 上傳對話框 -->
+            <div class="modal-overlay hidden" id="upload-modal">
+                <div class="modal">
+                    <h3>上傳圖片</h3>
+                    <div class="drop-zone" id="drop-zone">
+                        拖曳圖片至此處，或 <label class="drop-zone-link">點擊選取<input type="file" id="file-input" accept="image/*" hidden></label>
+                    </div>
+                    <p class="drop-zone-filename" id="selected-filename"></p>
+                    <div class="modal-actions">
+                        <button class="btn-secondary" id="upload-cancel">取消</button>
+                        <button class="btn-primary" id="upload-confirm" disabled>上傳</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 重新命名對話框 -->
+            <div class="modal-overlay hidden" id="rename-modal">
+                <div class="modal">
+                    <h3>重新命名</h3>
+                    <p class="modal-hint" id="rename-original"></p>
+                    <input type="text" class="modal-input" id="rename-input" />
+                    <div class="modal-actions">
+                        <button class="btn-secondary" id="rename-cancel">取消</button>
+                        <button class="btn-primary" id="rename-confirm">確認</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 刪除確認對話框 -->
+            <div class="modal-overlay hidden" id="delete-modal">
+                <div class="modal">
+                    <h3>確認刪除</h3>
+                    <p id="delete-message"></p>
+                    <label class="modal-checkbox" id="delete-pair-label">
+                        <input type="checkbox" id="delete-pair-check" />
+                        <span id="delete-pair-text"></span>
+                    </label>
+                    <div class="modal-actions">
+                        <button class="btn-secondary" id="delete-cancel">取消</button>
+                        <button class="btn-danger" id="delete-confirm">刪除</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <script src="/static/js/toast.js"></script>
     <script src="/static/js/spinner.js"></script>
     <script src="/static/js/router.js"></script>
     <script src="/static/js/editor.js"></script>
     <script src="/static/js/cropper.js"></script>
+    <script src="/static/js/browser.js"></script>
     <script src="/static/js/app.js"></script>
 </body>
 </html>

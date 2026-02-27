@@ -422,3 +422,254 @@ main {
 .md-preview a:hover {
     text-decoration: underline;
 }
+
+/* === 檔案瀏覽器 === */
+#page-browser.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.browser-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+}
+
+.browser-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.browser-table-wrap {
+    flex: 1;
+    overflow: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background-color: var(--color-surface);
+}
+
+.browser-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+.browser-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.browser-table th {
+    background-color: var(--color-bg);
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.browser-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.browser-table tbody tr:nth-child(even) {
+    background-color: var(--color-bg);
+}
+
+.browser-table tbody tr:hover {
+    background-color: #eef2ff;
+}
+
+/* 類型標籤 */
+.type-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.type-image {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+}
+
+.type-markdown {
+    background-color: #dcfce7;
+    color: #15803d;
+}
+
+/* 表格操作按鈕 */
+.file-action-btn {
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.15s, border-color 0.15s;
+}
+
+.file-action-btn:hover {
+    background-color: var(--color-bg);
+    border-color: var(--color-border);
+}
+
+/* === 共用按鈕 === */
+.btn-primary {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--color-primary-hover);
+}
+
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    padding: 8px 20px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-bg);
+}
+
+.btn-danger {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--color-error);
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.btn-danger:hover {
+    background-color: #b91c1c;
+}
+
+/* === Modal 對話框 === */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 500;
+}
+
+.modal-overlay.hidden {
+    display: none;
+}
+
+.modal {
+    background-color: var(--color-surface);
+    border-radius: 12px;
+    padding: 24px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.modal h3 {
+    margin-bottom: 16px;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.modal-hint {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 12px;
+}
+
+.modal-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-family: var(--font-sans);
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.modal-input:focus {
+    border-color: var(--color-primary);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.modal-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+/* === 拖曳上傳區 === */
+.drop-zone {
+    border: 2px dashed var(--color-border);
+    border-radius: 8px;
+    padding: 32px;
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    transition: border-color 0.15s, background-color 0.15s;
+    cursor: pointer;
+}
+
+.drop-zone.drag-over {
+    border-color: var(--color-primary);
+    background-color: #eff6ff;
+}
+
+.drop-zone-link {
+    color: var(--color-primary);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.drop-zone-link:hover {
+    text-decoration: underline;
+}
+
+.drop-zone-filename {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: var(--color-text);
+    font-weight: 500;
+    min-height: 1.3em;
+}
