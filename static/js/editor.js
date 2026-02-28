@@ -142,8 +142,23 @@ const Editor = (() => {
         }
     }
 
+    let ocrAvailable = true;
+
+    async function checkOcrStatus() {
+        try {
+            const res = await fetch('/api/ocr/status');
+            if (!res.ok) return;
+            const data = await res.json();
+            ocrAvailable = data.available;
+            if (!ocrAvailable) {
+                els.ocrBtn.disabled = true;
+                els.ocrBtn.title = data.message || '未設定 GOOGLE_APPLICATION_CREDENTIALS';
+            }
+        } catch { /* 網路錯誤時保持預設可用 */ }
+    }
+
     async function ocr() {
-        if (currentIndex < 0) return;
+        if (currentIndex < 0 || !ocrAvailable) return;
 
         els.ocrBtn.disabled = true;
         Spinner.show('OCR 辨識中...');
@@ -151,16 +166,19 @@ const Editor = (() => {
             const formData = new FormData();
             formData.append('filename', images[currentIndex].filename);
             const res = await fetch('/api/ocr', { method: 'POST', body: formData });
-            if (!res.ok) throw new Error('OCR failed');
+            if (!res.ok) {
+                const err = await res.json().catch(() => null);
+                throw new Error(err?.detail || 'OCR failed');
+            }
             const data = await res.json();
             els.mdEditor.value += '\n' + data.text;
             updateSaveBtn();
             Toast.show('OCR 辨識完成', 'success');
-        } catch {
-            Toast.show('OCR 辨識失敗', 'error');
+        } catch (e) {
+            Toast.show(e.message || 'OCR 辨識失敗', 'error');
         } finally {
             Spinner.hide();
-            els.ocrBtn.disabled = false;
+            els.ocrBtn.disabled = !ocrAvailable;
         }
     }
 
@@ -183,6 +201,7 @@ const Editor = (() => {
             }
         });
 
+        await checkOcrStatus();
         await loadImageList();
 
         if (images.length > 0) {

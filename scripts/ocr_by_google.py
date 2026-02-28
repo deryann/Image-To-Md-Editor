@@ -1,6 +1,7 @@
 """批次 OCR 腳本：使用 Google Cloud Vision API 對資料夾中的圖片進行文字辨識，並輸出為 .md 檔案。"""
 
 import argparse
+import os
 import sys
 from pathlib import Path
 
@@ -40,6 +41,22 @@ def main():
 
     if not input_dir.is_dir():
         print(f"錯誤：輸入資料夾不存在：{input_dir}", file=sys.stderr)
+        sys.exit(1)
+
+    cred_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+    if not cred_path:
+        print(
+            "錯誤：未設定環境變數 GOOGLE_APPLICATION_CREDENTIALS，"
+            "請先設定後再執行。",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    if not Path(cred_path).is_file():
+        print(
+            f"錯誤：GOOGLE_APPLICATION_CREDENTIALS 指向的檔案不存在："
+            f"{cred_path}",
+            file=sys.stderr,
+        )
         sys.exit(1)
 
     output_dir.mkdir(parents=True, exist_ok=True)

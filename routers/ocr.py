@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from fastapi import APIRouter, Form, HTTPException, UploadFile
@@ -9,12 +10,36 @@ router = APIRouter(prefix="/api/ocr", tags=["ocr"])
 IMAGES_DIR = Path("data/images")
 
 
+def _check_credentials() -> str | None:
+    """檢查 Google Cloud 憑證設定，回傳錯誤訊息或 None。"""
+    cred_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+    if not cred_path:
+        return "未設定環境變數 GOOGLE_APPLICATION_CREDENTIALS"
+    if not Path(cred_path).is_file():
+        return (
+            f"GOOGLE_APPLICATION_CREDENTIALS 指向的檔案不存在："
+            f"{cred_path}"
+        )
+    return None
+
+
+@router.get("/status")
+async def ocr_status():
+    """回傳 OCR 服務是否可用。"""
+    error = _check_credentials()
+    return {"available": error is None, "message": error or ""}
+
+
 @router.post("")
 async def ocr_image(
     filename: str | None = Form(default=None),
     file: UploadFile | None = None,
 ):
     """對圖片執行中文 OCR 文字辨識（Google Vision API document_text_detection）"""
+    cred_error = _check_credentials()
+    if cred_error:
+        raise HTTPException(status_code=503, detail=cred_error)
+
     if filename:
         path = IMAGES_DIR / filename
         if not path.is_file():
