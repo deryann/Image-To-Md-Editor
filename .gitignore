@@ -19,5 +19,6 @@ data/mds/embedded_images/*
 !data/mds/embedded_images/.gitkeep
 
 # IDE
+.claude/
 .vscode/
 .idea/
