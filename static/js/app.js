@@ -8,4 +8,5 @@ document.addEventListener('DOMContentLoaded', () => {
     Cropper.init();
     Searcher.init();
     Browser.init();
+    Responsive.init();
 });

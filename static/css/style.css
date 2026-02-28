@@ -751,3 +751,116 @@ main {
     font-weight: 500;
     min-height: 1.3em;
 }
+
+/* === 行動版 Tab 列（預設隱藏） === */
+.mobile-tabs {
+    display: none;
+    flex-shrink: 0;
+}
+
+/* === 響應式設計 === */
+
+/* --- 中等螢幕：768–1023px --- */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .editor-layout .panel-left {
+        flex: 0 0 40%;
+    }
+
+    .editor-layout .panel-right {
+        flex: 0 0 60%;
+    }
+}
+
+/* --- 小螢幕：< 768px --- */
+@media (max-width: 767px) {
+    /* Navbar 緊縮 */
+    .navbar {
+        padding: 0 12px;
+    }
+
+    .navbar-brand {
+        font-size: 1rem;
+    }
+
+    .nav-link {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+
+    /* 頁面 padding 縮小 */
+    .page {
+        padding: 12px;
+    }
+
+    #page-editor.active {
+        padding: 0;
+    }
+
+    /* 行動版 Tab 列顯示 */
+    .mobile-tabs {
+        display: flex;
+        background-color: var(--color-surface);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .mobile-tab {
+        flex: 1;
+        padding: 10px 0;
+        border: none;
+        background: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        transition: color 0.15s, border-color 0.15s;
+    }
+
+    .mobile-tab:hover {
+        color: var(--color-text);
+    }
+
+    .mobile-tab.active {
+        color: var(--color-primary);
+        border-bottom-color: var(--color-primary);
+    }
+
+    /* 編輯器面板上下堆疊 */
+    .editor-layout {
+        flex-direction: column;
+    }
+
+    .editor-layout .panel {
+        flex: 1;
+        min-height: 0;
+    }
+
+    /* 預設隱藏非活躍面板 */
+    .editor-layout .panel.mobile-hidden {
+        display: none;
+    }
+
+    /* 檔案瀏覽器表格：隱藏「關聯」欄 */
+    .browser-table th:nth-child(3),
+    .browser-table td:nth-child(3) {
+        display: none;
+    }
+
+    /* 表格欄位 padding 縮小 */
+    .browser-table th,
+    .browser-table td {
+        padding: 8px 10px;
+    }
+
+    /* 檔案瀏覽器標題區 */
+    .browser-header {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    /* Modal 適配 */
+    .modal {
+        margin: 0 12px;
+        max-width: none;
+    }
+}
