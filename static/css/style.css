@@ -17,9 +17,41 @@
     --color-border: #e2e8f0;
     --color-success: #16a34a;
     --color-error: #dc2626;
+    --color-table-hover: #eef2ff;
+    --color-dropzone-active: #eff6ff;
+    --color-danger-hover: #b91c1c;
     --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
     --font-mono: "Fira Code", "Cascadia Code", Consolas, monospace;
     --navbar-height: 56px;
+    color-scheme: light;
+}
+
+/* === Dark Mode 主題覆蓋 === */
+[data-theme="dark"] {
+    --color-primary: #3b82f6;
+    --color-primary-hover: #60a5fa;
+    --color-bg: #0f172a;
+    --color-surface: #1e293b;
+    --color-text: #f1f5f9;
+    --color-text-secondary: #94a3b8;
+    --color-border: #334155;
+    --color-success: #22c55e;
+    --color-error: #ef4444;
+    --color-table-hover: #1e3a5f;
+    --color-dropzone-active: #172554;
+    --color-danger-hover: #dc2626;
+    color-scheme: dark;
+}
+
+/* Dark Mode 語義色彩元件覆蓋 */
+[data-theme="dark"] .type-image {
+    background-color: #1e3a5f;
+    color: #93c5fd;
+}
+
+[data-theme="dark"] .type-markdown {
+    background-color: #14532d;
+    color: #86efac;
 }
 
 html, body {
@@ -299,6 +331,11 @@ main {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+    transition: filter 0.3s ease;
+}
+
+#preview-image.inverted {
+    filter: invert(1);
 }
 
 /* === 右面板 Markdown 編輯區 === */
@@ -521,7 +558,7 @@ main {
 }
 
 .browser-table tbody tr:hover {
-    background-color: #eef2ff;
+    background-color: var(--color-table-hover);
 }
 
 /* 類型標籤 */
@@ -610,7 +647,7 @@ main {
 }
 
 .btn-danger:hover {
-    background-color: #b91c1c;
+    background-color: var(--color-danger-hover);
 }
 
 /* === Modal 對話框 === */
@@ -694,7 +731,7 @@ main {
 
 .drop-zone.drag-over {
     border-color: var(--color-primary);
-    background-color: #eff6ff;
+    background-color: var(--color-dropzone-active);
 }
 
 .drop-zone-link {

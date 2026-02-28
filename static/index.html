@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image-To-Md-Editor</title>
     <link rel="stylesheet" href="/static/css/style.css">
+    <!-- 防止 Dark Mode 頁面閃白：在 CSS 載入後立即設定 data-theme -->
+    <script>
+        (function() {
+            var s = localStorage.getItem('theme-preference');
+            var d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-theme', s || (d ? 'dark' : 'light'));
+        })();
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 </head>
@@ -15,6 +23,9 @@
             <a href="#/editor" class="nav-link" data-page="editor">Editor</a>
             <a href="#/browser" class="nav-link" data-page="browser">File Browser</a>
         </div>
+        <button class="btn btn-icon" id="btn-theme-toggle" title="切換深色/淺色主題" aria-label="切換主題">
+            <span id="theme-icon">🌙</span>
+        </button>
     </nav>
     <main>
         <div id="page-editor" class="page">
@@ -31,6 +42,7 @@
                         <button class="btn btn-icon" id="btn-prev" title="上一張">&lt;</button>
                         <span class="toolbar-filename" id="current-filename">—</span>
                         <button class="btn btn-icon" id="btn-next" title="下一張">&gt;</button>
+                        <button class="btn btn-icon" id="btn-grayscale" title="切換黑白顯示">◑</button>
                     </div>
                     <div class="image-preview" id="image-preview">
                         <img id="preview-image" alt="圖片預覽" />
@@ -122,6 +134,7 @@
     <script src="/static/js/cropper.js"></script>
     <script src="/static/js/search.js"></script>
     <script src="/static/js/browser.js"></script>
+    <script src="/static/js/theme.js"></script>
     <script src="/static/js/app.js"></script>
 </body>
 </html>

@@ -7,6 +7,7 @@ const Editor = (() => {
     let currentIndex = -1;
     let savedMarkdown = '';
     let previewMode = false;
+    let invertEnabled = false;
 
     const els = {};
 
@@ -21,6 +22,7 @@ const Editor = (() => {
         els.ocrBtn = document.getElementById('btn-ocr');
         els.previewBtn = document.getElementById('btn-preview');
         els.mdPreview = document.getElementById('md-preview');
+        els.grayscaleBtn = document.getElementById('btn-grayscale');
     }
 
     async function loadImageList() {
@@ -93,6 +95,7 @@ const Editor = (() => {
         const info = images[currentIndex];
         els.image.src = `/data/images/${info.filename}`;
         els.image.alt = info.filename;
+        els.image.classList.toggle('inverted', invertEnabled);
 
         updateToolbar();
 
@@ -142,6 +145,12 @@ const Editor = (() => {
         }
     }
 
+    function toggleInvert() {
+        invertEnabled = !invertEnabled;
+        els.image.classList.toggle('inverted', invertEnabled);
+        els.grayscaleBtn.classList.toggle('active', invertEnabled);
+    }
+
     let ocrAvailable = true;
 
     async function checkOcrStatus() {
@@ -189,6 +198,7 @@ const Editor = (() => {
         els.saveBtn.addEventListener('click', save);
         els.ocrBtn.addEventListener('click', ocr);
         els.previewBtn.addEventListener('click', togglePreview);
+        els.grayscaleBtn.addEventListener('click', toggleInvert);
 
         els.mdEditor.addEventListener('input', updateSaveBtn);
 
